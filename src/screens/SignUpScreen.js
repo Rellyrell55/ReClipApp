@@ -1,7 +1,11 @@
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
+
+import { Alert, Platform } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
+import * as Permissions from 'expo-permissions'
+import * as ImagePicker from 'expo-image-picker'
 
 import Text from '../components/Text'
 export default SignUpScreen = ({ navigation }) => {
@@ -10,6 +14,42 @@ export default SignUpScreen = ({ navigation }) => {
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [loading, setLoading] = useState(false)
+    const [profilePhoto, setProfilePhoto] = useState()
+
+    const getPermission = async () => {
+        if (Platform.OS !== 'web'){
+            const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL)
+
+            return status
+        }
+    }
+
+    const  pickImage = async () => {
+        try {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Image,
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: .5
+            })
+            if (!result.cancelled){
+                setProfilePhoto(result.uri)
+            }
+        } catch (error){
+            console.log('Error @pickerImage ', error)
+        }
+    }
+
+    const addProfilePhoto = async () => {
+        const status = await getPermission()
+
+        if (status !== 'granted'){
+            alert('We need permission to access your camera roll.')
+
+            return
+        }
+        pickImage()
+    }
     
     
     return(
@@ -19,10 +59,14 @@ export default SignUpScreen = ({ navigation }) => {
                     Sign up to get started.
                 </Text>
             </Main>
-            <ProfilePhotoContainer>
+            <ProfilePhotoContainer onPress={addProfilePhoto}>
+                {profilePhoto ? (
+                    <ProfilePhoto source={{uri: profilePhoto}} />
+                ):(
                 <DefaultProfilePhoto>
                     <AntDesign name='plus' size={24} color='#ffffff'/>
                 </DefaultProfilePhoto>
+                )}
             </ProfilePhotoContainer>
             <Auth>
                 <AuthContainer>
@@ -103,10 +147,14 @@ const ProfilePhotoContainer = styled.TouchableOpacity`
 `
 
 const DefaultProfilePhoto = styled.View`
+    flex: 1;
     align-items: center;
     justify-content: center; 
-    flex: 1;
 `
+const ProfilePhoto = styled.Image`
+    flex:1;
+`
+
 
 const Auth = styled.View`
     margin: 64px 32px 32px;
