@@ -1,9 +1,13 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import Text from '../components/Text'
 export default SigninScreen = () => {
+
+    const [email, setEmail] = useState()
+    const [password, setPassword] = useState()
+    const [loading, setLoading] = useState(false)
     
     return(
         <Container>
@@ -21,6 +25,8 @@ export default SigninScreen = () => {
                     autoCorrect={false}
                     autoFocus={true}
                     keyboardType='email-address'
+                    onChangeText={email => setEmail(email.trim())}
+                    value={email}
                     />
                 </AuthContainer>
                 <AuthContainer>
@@ -31,16 +37,27 @@ export default SigninScreen = () => {
                     autoCorrect={false}
                     autoFocus={true}
                     secureTextEntry={true}
+                    onChangeText={password => setPassword(password.trim())}
+                    value={password}
                     />
                 </AuthContainer>
             </Auth>
             <SignInContainer>
+                {loading ? (
+                    <Loading/>
+                ):(
                 <Text bold center color='#ffffff'>
                     Sign in
                 </Text>
+                )}
             </SignInContainer>
             <SignUp>
-                <Text>New to SocialBee? <Text>Sign Up</Text></Text>
+                <Text small center >
+                    New to SocialBee?{' '}
+                    <Text bold color='#8022d9'>
+                        Sign Up
+                    </Text>
+                </Text>
             </SignUp>
             <HeaderGraphic>
                 <RightCircle/>
@@ -86,7 +103,14 @@ const SignInContainer = styled.TouchableOpacity`
     background-color: #8022d9;
     border-radius: 6px
 `
-const SignUp = styled.TouchableOpacity``
+const Loading = styled.ActivityIndicator.attrs(props => ({
+    color: '#ffffff',
+    size: 'small',
+}))``
+
+const SignUp = styled.TouchableOpacity`
+    margin-top: 16px; 
+`
 
 
 const HeaderGraphic = styled.View`
