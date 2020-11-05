@@ -76,7 +76,7 @@ export default SignUpScreen = ({ navigation }) => {
                     autoCorrect={false}
                     autoFocus={true}
                     onChangeText={username => setUsername(username.trim())}
-                    value={email}
+                    value={username}
                     />
                 </AuthContainer>
                 <AuthContainer>

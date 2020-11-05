@@ -1,13 +1,17 @@
 import React from 'react'
-import {NavigationContainer} from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native'
+
+import { UserProvider } from './src/context/UserContext'
 
 import AppStackScreens from './src/stacks/AppStackScreens'
 
 export default App = () => {
 
   return (
-    <NavigationContainer>
-      <AppStackScreens/>
-    </NavigationContainer>
+    <UserProvider>
+      <NavigationContainer>
+        <AppStackScreens/>
+      </NavigationContainer>
+    </UserProvider>
   )
 }
