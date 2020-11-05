@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import Text from '../components/Text'
-export default SigninScreen = () => {
+export default SigninScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
@@ -35,14 +35,13 @@ export default SigninScreen = () => {
                     autoCapitalize='none' 
                     autoCompleteType='password'
                     autoCorrect={false}
-                    autoFocus={true}
                     secureTextEntry={true}
                     onChangeText={password => setPassword(password.trim())}
                     value={password}
                     />
                 </AuthContainer>
             </Auth>
-            <SignInContainer>
+            <SignInContainer disable={loading}>
                 {loading ? (
                     <Loading/>
                 ):(
@@ -51,7 +50,7 @@ export default SigninScreen = () => {
                 </Text>
                 )}
             </SignInContainer>
-            <SignUp>
+            <SignUp onPress={() => navigation.navigate('SignUp')}>
                 <Text small center >
                     New to SocialBee?{' '}
                     <Text bold color='#8022d9'>
