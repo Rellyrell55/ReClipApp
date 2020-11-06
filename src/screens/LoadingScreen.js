@@ -1,18 +1,38 @@
-import React from 'react'
-import { View, Text, StyleSheet} from 'react-native'
+import React, {useContext, useEffect} from 'react'
+import styled from 'styled-components'
+import LottieView from 'lottie-react-native'
 
-export default LoadingScreen = () => {
+import {UserContext} from '../context/UserContext'
+
+import Text from '../components/Text'
+
+const LoadingScreen = () => {
+    const [_, setUser] = useContext(UserContext)
+    
+    useEffect(() => {
+        setTimeout(async () => {
+            setUser(state => ({...state, isLoggedIn: false}))
+        }, 1500)
+    }, [])
+
     return (
-        <View style={styles.container}>
-            <Text>Loading Screen</Text>
-        </View>
+        <Container>
+            <Text title color="#FFFFFF">ReClip</Text>
+        <LottieView
+            source={require('../../assets/lf30_editor_wecjybsi.json')}
+            autoPlay
+            loop
+            style={{width: "50%", marginTop: 24 }}
+        />
+        </Container> 
     )
 }
-const styles = StyleSheet.create({
-    container: {
-    flex: 1,
-    backgroundColor: 'rgb(203, 243, 240)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    },
-});
+
+export default LoadingScreen
+
+const Container = styled.View`
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    background-color: #222222;
+`
