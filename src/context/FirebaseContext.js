@@ -5,7 +5,7 @@ import 'firebase/auth'
 import 'firebase/firestore'
 import config from '../config/firebase'
 
-const Context = createContext()
+const FirebaseContext = createContext()
 
 if(!firebase.apps.length){
     firebase.initializeApp(config)
@@ -16,8 +16,8 @@ const db = firebase.firestore()
 
 const Firebase = {}
 
-const  FireBaseProvider = (props) => {
-    return <Context.Provider value={Firebase}>{props.children}</Context.Provider>
+const  FirebaseProvider = (props) => {
+    return <FirebaseContext.Provider value={Firebase}>{props.children}</FirebaseContext.Provider>
 }
 
-export default FireBaseProvider
+export {FirebaseProvider, FirebaseContext}

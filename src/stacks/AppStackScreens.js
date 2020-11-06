@@ -5,6 +5,7 @@ import { UserContext } from '../context/UserContext'
 
 import AuthStackScreens from './AuthStackScreens'
 import MainStackScreens from './MainStackScreens'
+import LoadingScreen from "../screens/LoadingScreen"
 
 
 export default AppStackScreens = () => {
