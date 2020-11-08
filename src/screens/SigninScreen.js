@@ -1,13 +1,46 @@
 
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
 
 import Text from '../components/Text'
+
+import { FirebaseContext } from '../context/FirebaseContext'
+import { UserContext } from '../context/UserContext'
+
+
+
 export default SigninScreen = ({ navigation }) => {
 
     const [email, setEmail] = useState()
     const [password, setPassword] = useState()
     const [loading, setLoading] = useState(false)
+    const firebase = useContext(FirebaseContext)
+    const [_, setUser] = useContext(UserContext)
+
+    const signIn = async () => { 
+        setLoading (true)
+
+        try {
+            await firebase.signIn(email, password)
+
+            const uid = firebase.getCurrentUser().uid
+
+            const userInfo = await firebase.getUserInfo(uid)
+
+            setUser({
+                username: userInfo.username,
+                email: userInfo.email,
+                uid,
+                profilePhotoUrl: userInfo.profilePhotoUrl,
+                isLoggedIn: true
+            })
+        }catch(error){
+            alert(error.message)
+        }finally{
+            setLoading(false)
+        }
+        
+    }
     
     return(
         <Container>
@@ -41,7 +74,7 @@ export default SigninScreen = ({ navigation }) => {
                     />
                 </AuthContainer>
             </Auth>
-            <SignInContainer disable={loading}>
+            <SignInContainer onPress={signIn} disable={loading}>
                 {loading ? (
                     <Loading/>
                 ):(

@@ -35,7 +35,7 @@ const Firebase = {
                 profilePhotoUrl
             })
 
-            if (user.profilePhotoUrl){
+            if (user.profilePhoto){
                 profilePhotoUrl = await Firebase.uploadProfilePhoto(user.profilePhoto)
             }
 
@@ -53,18 +53,18 @@ const Firebase = {
         try {
             const photo = await Firebase.getBlob(uri)
 
-            const imageRef = firebase.storage().ref('profilePhotos').child(uid)
+            const imageRef = firebase.storage().ref("profilePhotos").child(uid)
             await imageRef.put(photo)
 
             const url = await imageRef.getDownloadURL()
 
-            await db.collection('users').doc(uid).update({
+            await db.collection("users").doc(uid).update({
                 profilePhotoUrl: url
             })
 
             return url
         }catch (error) {
-            console.log("Error @uploadProfilePhoto: ", error.message)
+            console.log("Error @uploadProfilePhoto: ", error)
         }
     },
 
@@ -84,6 +84,34 @@ const Firebase = {
             xhr.open("GET", uri, true)
             xhr.send(null)
         })
+    },
+
+    getUserInfo: async (uid) => {
+        try {
+            const user = await db.collection('users').doc(uid).get()
+
+            if (user.exists) {
+                return user.data()
+            }
+        } catch (error){
+            console.log('Error @getUserInfo: ', error)
+        }
+    },
+
+    logOut: async () => {
+        try{
+            await firebase.auth().signOut()
+
+            return true
+        }catch (error){
+            console.log('Error @logOut: ', error)
+        }
+
+        return false
+    },
+    
+    signIn: async (email, password) =>{
+        return firebase.auth().signInWithEmailAndPassword(email, password)
     }
 }
 
