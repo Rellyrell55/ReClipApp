@@ -39,12 +39,13 @@ export default MainStackScreens = () => {
                 return <Ionicons 
                     name='ios-camera' 
                     size={46} 
-                    color='#23a8d9'
+                    color={focused ? '#FFBF69': '#FF9F1C'}
                     style={{
-                        shadowColor: '#23a8d9',
+                        shadowColor: '#FFBF69',
                         shadowOffset: {width:0, height: 10},
                         shadowRadius: 10,
                         shadowOpacity: 0.3
+                        
 
                     }}
                 />

@@ -1,6 +1,7 @@
 
 import React, { useState, useContext } from 'react'
 import styled from 'styled-components'
+import LottieView from 'lottie-react-native'
 
 import Text from '../components/Text'
 
@@ -44,6 +45,7 @@ export default SigninScreen = ({ navigation }) => {
     
     return(
         <Container>
+            <UserContainer>
             <Main>
                 <Text title semi center>
                     Welcome Back.
@@ -56,7 +58,7 @@ export default SigninScreen = ({ navigation }) => {
                     autoCapitalize='none' 
                     autoCompleteType='email'
                     autoCorrect={false}
-                    autoFocus={true}
+                    //autoFocus={true}
                     keyboardType='email-address'
                     onChangeText={email => setEmail(email.trim())}
                     value={email}
@@ -86,14 +88,25 @@ export default SigninScreen = ({ navigation }) => {
             <SignUp onPress={() => navigation.navigate('SignUp')}>
                 <Text small center >
                     New to SocialBee?{' '}
-                    <Text bold color='#8022d9'>
+                    <Text bold color='#FF9F1C'>
                         Sign Up
                     </Text>
                 </Text>
             </SignUp>
+            </UserContainer>
             <HeaderGraphic>
                 <RightCircle/>
                 <LeftCircle/>
+                <LottieView 
+                    source={require('../../assets/lf30_editor_kouk4zzz.json')}
+                    autoPlay={'once'}
+                    loop={false}
+                    style={{
+                        width: "75%", 
+                        marginTop: 0,
+                        marginLeft: 25
+                    }}
+                />
             </HeaderGraphic>
             <StatusBar barStyle='light-content'/>
         </Container>
@@ -102,10 +115,14 @@ export default SigninScreen = ({ navigation }) => {
 
 const Container = styled.View`
     flex: 1;
+    background-color: #ffffff
 `
 
 const Main = styled.View`
     margin-top: 192px;
+`
+const UserContainer = styled.View`
+    margin-top: 125px
 `
 const Auth = styled.View`
     margin: 64px 32px 32px;
@@ -132,7 +149,7 @@ const SignInContainer = styled.TouchableOpacity`
     height: 48px;
     align-items: center;
     justify-content: center;
-    background-color: #8022d9;
+    background-color: #FF9F1C;
     border-radius: 6px
 `
 const Loading = styled.ActivityIndicator.attrs(props => ({
@@ -148,26 +165,26 @@ const SignUp = styled.TouchableOpacity`
 const HeaderGraphic = styled.View`
     position: absolute;
     width: 100%;
-    top: -25px;
+    top: 30px;
     z-index: -100;
 `
 
 const RightCircle = styled.View`
-    background-color: #8022d9;
+    background-color: #FF9F1C;
     position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;`
+    width: 500px;
+    height: 500px;
+    border-radius: 250px;
+    right: -40px;
+    top: -235px;`
 
 const LeftCircle = styled.View`
-    background-color: #23a6d5;
+    background-color: #ffffff;
     position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
+    width: 350px;
+    height: 350px;
+    border-radius: 500px;
+    left: 50px;
     top: -50px;
 `
 const StatusBar = styled.StatusBar``

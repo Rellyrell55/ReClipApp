@@ -1,6 +1,7 @@
 
 import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
+import LottieView from 'lottie-react-native'
 
 import { Alert, Platform } from 'react-native'
 import { AntDesign } from '@expo/vector-icons'
@@ -76,75 +77,87 @@ export default SignUpScreen = ({ navigation }) => {
     
     return(
         <Container>
-            <Main>
-                <Text title semi center>
-                    Sign up to get started.
-                </Text>
-            </Main>
-            <ProfilePhotoContainer onPress={addProfilePhoto}>
-                {profilePhoto ? (
-                    <ProfilePhoto source={{uri: profilePhoto}} />
-                ):(
-                <DefaultProfilePhoto>
-                    <AntDesign name='plus' size={24} color='#ffffff'/>
-                </DefaultProfilePhoto>
-                )}
-            </ProfilePhotoContainer>
-            <Auth>
-                <AuthContainer>
-                    <AuthTitle>Username</AuthTitle>
-                    <AuthField 
-                    autoCapitalize='none' 
-                    autoCorrect={false}
-                    autoFocus={true}
-                    onChangeText={username => setUsername(username.trim())}
-                    value={username}
-                    />
-                </AuthContainer>
-                <AuthContainer>
-                    <AuthTitle>Email Address</AuthTitle>
-                    <AuthField 
-                    autoCapitalize='none' 
-                    autoCompleteType='email'
-                    autoCorrect={false}
-                    autoFocus={true}
-                    keyboardType='email-address'
-                    onChangeText={email => setEmail(email.trim())}
-                    value={email}
-                    />
-                </AuthContainer>
-                <AuthContainer>
-                    <AuthTitle>Password</AuthTitle>
-                    <AuthField 
-                    autoCapitalize='none' 
-                    autoCompleteType='password'
-                    autoCorrect={false}
-                    secureTextEntry={true}
-                    onChangeText={password => setPassword(password.trim())}
-                    value={password}
-                    />
-                </AuthContainer>
-            </Auth>
-            <SignUpContainer onPress={signUp} disable={loading}>
-                {loading ? (
-                    <Loading/>
-                ):(
-                <Text bold center color='#ffffff'>
-                    Sign up
-                </Text>
-                )}
-            </SignUpContainer>
-            <SignUp onPress={() => navigation.navigate('SignIn')}>
-                <Text small center>
-                    Already have an account? {''}
-                    <Text bold color='#8022d9'>
-                        Sign In
+            <UserContainer>
+                <Main>
+                    <Text title semi center>
+                        Sign up to get started.
                     </Text>
-                </Text>
-            </SignUp>
+                </Main>
+                <ProfilePhotoContainer onPress={addProfilePhoto}>
+                    {profilePhoto ? (
+                        <ProfilePhoto source={{uri: profilePhoto}} />
+                    ):(
+                    <DefaultProfilePhoto>
+                        <AntDesign name='plus' size={24} color='#ffffff'/>
+                    </DefaultProfilePhoto>
+                    )}
+                </ProfilePhotoContainer>
+                <Auth>
+                    <AuthContainer>
+                        <AuthTitle>Username</AuthTitle>
+                        <AuthField 
+                        autoCapitalize='none' 
+                        autoCorrect={false}
+                        //autoFocus={true}
+                        onChangeText={username => setUsername(username.trim())}
+                        value={username}
+                        />
+                    </AuthContainer>
+                    <AuthContainer>
+                        <AuthTitle>Email Address</AuthTitle>
+                        <AuthField 
+                        autoCapitalize='none' 
+                        autoCompleteType='email'
+                        autoCorrect={false}
+                        //autoFocus={true}
+                        keyboardType='email-address'
+                        onChangeText={email => setEmail(email.trim())}
+                        value={email}
+                        />
+                    </AuthContainer>
+                    <AuthContainer>
+                        <AuthTitle>Password</AuthTitle>
+                        <AuthField 
+                        autoCapitalize='none' 
+                        autoCompleteType='password'
+                        autoCorrect={false}
+                        secureTextEntry={true}
+                        onChangeText={password => setPassword(password.trim())}
+                        value={password}
+                        />
+                    </AuthContainer>
+                </Auth>
+                <SignUpContainer onPress={signUp} disable={loading}>
+                    {loading ? (
+                        <Loading/>
+                    ):(
+                    <Text bold center color='#ffffff'>
+                        Sign up
+                    </Text>
+                    )}
+                </SignUpContainer>
+                <SignUp onPress={() => navigation.navigate('SignIn')}>
+                    <Text small center>
+                        Already have an account? {''}
+                        <Text bold color='#FF9F1C'>
+                            Sign In
+                        </Text>
+                    </Text>
+                </SignUp>
+            </UserContainer>
             <HeaderGraphic>
                 <RightCircle/>
                 <LeftCircle/>
+                <LottieView 
+                    source={require('../../assets/lf30_editor_kouk4zzz.json')}
+                    loop={false}
+                    autoPlay={true}
+                    style={{
+                        width: "75%", 
+                        marginTop: 0,
+                        marginLeft: 25
+                    }}
+                />
             </HeaderGraphic>
             <StatusBar barStyle='light-content'/>
         </Container>
@@ -153,11 +166,16 @@ export default SignUpScreen = ({ navigation }) => {
 
 const Container = styled.View`
     flex: 1;
+    background-color: #ffffff
 `
 
 const Main = styled.View`
     margin-top: 185px;
 `
+const UserContainer = styled.View`
+    margin-top: 75px
+`
+
 const ProfilePhotoContainer = styled.TouchableOpacity`
     background-color: #e1e2e6;
     width: 80px;
@@ -203,7 +221,7 @@ const SignUpContainer = styled.TouchableOpacity`
     height: 48px;
     align-items: center;
     justify-content: center;
-    background-color: #8022d9;
+    background-color: #FF9F1C;
     border-radius: 6px
 `
 const Loading = styled.ActivityIndicator.attrs(props => ({
@@ -224,21 +242,21 @@ const HeaderGraphic = styled.View`
 `
 
 const RightCircle = styled.View`
-    background-color: #8022d9;
+    background-color: #FF9F1C;
     position: absolute;
-    width: 400px;
-    height: 400px;
-    border-radius: 200px;
-    right: -100px;
-    top: -200px;`
+    width: 500px;
+    height: 500px;
+    border-radius: 250px;
+    right: -40px;
+    top: -235px;`
 
 const LeftCircle = styled.View`
-    background-color: #23a6d5;
+    background-color: #ffffff;
     position: absolute;
-    width: 200px;
-    height: 200px;
-    border-radius: 100px;
-    left: -50px;
+    width: 350px;
+    height: 350px;
+    border-radius: 500px;
+    left: 50px;
     top: -50px;
 `
 const StatusBar = styled.StatusBar``

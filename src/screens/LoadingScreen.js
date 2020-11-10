@@ -12,14 +12,14 @@ const LoadingScreen = () => {
     useEffect(() => {
         setTimeout(async () => {
             setUser(state => ({...state, isLoggedIn: false}))
-        }, 500)
+        }, 1500)
     }, [])
 
     return (
         <Container>
             <Text title color='#FFFFFF'>ReClip</Text>
         <LottieView
-            source={require('../../assets/lf30_editor_wecjybsi.json')}
+            source={require('../../assets/lf30_editor_zclugjw7.json')}
             autoPlay
             loop
             style={{width: "50%", marginTop: 24 }}

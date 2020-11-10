@@ -1,18 +1,39 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import styled from 'styled-components'
+
+import Text from '../components/Text'
+
 
 export default MessagesScreen = () => {
     return (
-        <View style={styles.container}>
-            <Text>Messages Screen</Text>
-        </View>
+        <Container>
+            <Header>
+                <HeaderText>
+                    <Text title bold center> Messages </Text>
+                </HeaderText>
+            </Header>
+            <MessagesContainer>
+                
+
+            </MessagesContainer>
+        </Container>
     )
 }
-const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: 'rgb(203, 243, 240)',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-  });
+
+const Container = styled.View``
+
+const Header = styled.View`
+    margin-top: -25px
+    height: 150px 
+    border-bottom-color: #8e93a1;
+    border-bottom-width: 0.5px;
+    background-color: #FF9F1C
+`
+const HeaderText = styled.View`
+    margin-top: 95px
+`
+const MessagesContainer = styled.View``
+
+
+
+
