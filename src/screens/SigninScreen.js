@@ -87,7 +87,7 @@ export default SigninScreen = ({ navigation }) => {
             </SignInContainer>
             <SignUp onPress={() => navigation.navigate('SignUp')}>
                 <Text small center >
-                    New to SocialBee?{' '}
+                    New to ReClip?{' '}
                     <Text bold color='#FF9F1C'>
                         Sign Up
                     </Text>

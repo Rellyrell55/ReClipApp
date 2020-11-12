@@ -57,10 +57,9 @@ export default MainStackScreens = () => {
 
     return(
         <MainStack.Navigator tabBarOptions={tabBarOptions} screenOptions={screenOptions}>
-            <MainStack.Screen name='Messages' component={MessagesScreen}/>
-            {/* <MainStack.Screen name='Home' component={HomeScreen}/> */}
-            <MainStack.Screen name='Camera' component={CameraScreen}/>
             <MainStack.Screen name='Profile' component={ProfileScreen}/>
+            <MainStack.Screen name='Camera' component={CameraScreen} />
+            <MainStack.Screen name='Messages' component={MessagesScreen}/>
         </MainStack.Navigator>
     )
 }

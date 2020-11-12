@@ -6,6 +6,10 @@ import { FirebaseProvider } from './src/context/FirebaseContext'
 
 import AppStackScreens from './src/stacks/AppStackScreens'
 
+import { LogBox } from 'react-native';
+
+LogBox.ignoreAllLogs();
+
 export default App = () => {
 
   

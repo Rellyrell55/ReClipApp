@@ -29,10 +29,11 @@ const Firebase = {
 
             let profilePhotoUrl = 'default'
 
+
             await db.collection('users').doc(uid).set({
                 username: user.username,
                 email: user.email,
-                profilePhotoUrl
+                profilePhotoUrl,
             })
 
             if (user.profilePhoto){
@@ -44,6 +45,25 @@ const Firebase = {
             return { ...user, profilePhotoUrl, uid}
         } catch (error) {
             console.log("Error @createUser: ", error.message)
+        }
+    },
+
+    uploadPhotoMessages: async (uri) => {
+        const uid = Firebase.getCurrentUser().uid
+
+        try{
+            const photo = await Firebase.getBlob(uri)
+
+            const imageRef = firebase.storage().ref("photoMessages").child(uid)
+            await imageRef.put(photo)
+
+            const url = await imageRef.getDownloadURL()
+
+            await db.collection("users").doc(uid).update({
+                mesages: [...url]
+            })
+        }catch(error){
+            console.log("Error @uploadPhotoMessages: ", error)
         }
     },
 
