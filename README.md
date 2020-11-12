@@ -1,8 +1,6 @@
 # README
 
 # ReClip! App
-Live Demo: https://superchat-b1dee.web.app/
-
 
 > ReClip is an app were users and see the reaction of to pictures sent to other users once they have opened the picture 
 
